@@ -1,6 +1,5 @@
 import CreateAndJoinDocument from "./components/CreateAndJoinDocument/CreateAndJoinDocument";
-import docsIcon from "@/../public/icons/docs.png";
-import Image from "next/image";
+import DocumentsTable from "@/components/DocumentsTable/DocumentsTable";
 
 export default function Home() {
   return (
@@ -19,26 +18,7 @@ export default function Home() {
         <h1 className="mt-3 mb-7 text-xl font-semibold text-gray-800">
           Recent documents
         </h1>
-        <table className="w-full table-auto">
-          <tbody>
-            <tr className="border-b border-b-gray-500">
-              <th></th>
-              <th className="text-start py-2">Name</th>
-              <th className="text-start">Owner</th>
-              <th className="text-start">Shared owners</th>
-            </tr>
-            <tr className="border-b border-b-gray-500 hover:bg-gray-100 cursor-pointer">
-              <td>
-                <Image src={docsIcon} height={20} width={20} alt="doc icon" />
-              </td>
-              <td className="py-3">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td>Yamin Hossain</td>
-              <td>Yamin, Hossain</td>
-            </tr>
-          </tbody>
-        </table>
+        <DocumentsTable></DocumentsTable>
       </div>
     </div>
   );

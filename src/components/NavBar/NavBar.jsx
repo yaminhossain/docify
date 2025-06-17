@@ -21,7 +21,8 @@ const NavBar = () => {
       <Link
         href={"/documents"}
         className={`flex flex-col items-center text-neutral-700 ${
-          pathname === "/documents" && "bg-indigo-500 text-white rounded-md p-2"
+          pathname.startsWith("/documents") &&
+          "bg-indigo-500 text-white rounded-md p-2"
         }`}
         title="Documents"
       >
