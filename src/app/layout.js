@@ -1,6 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
+import { ToastContainer } from "react-toastify";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
           <NavBar></NavBar>
           <main className="ms-[57px]">{children}</main>
+          <ToastContainer></ToastContainer>
       </body>
     </html>
   );
