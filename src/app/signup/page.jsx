@@ -1,6 +1,6 @@
 import signUpAndLoginAnimation from "@/../public/animations/signUpAndLoginAnimation.json";
 import LottieAnimation from "@/components/LottieAnimation/LottieAnimation";
-// import SocialLogin from "@/components/SocialLogin/SocialLogin";
+import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import Link from "next/link";
 import SignUpPageForm from "./Components/SignUpPageForm";
 
@@ -19,7 +19,7 @@ const SignUpPage = () => {
         <div className="flex-1 p-4">
           <SignUpPageForm></SignUpPageForm>
           {/* ======social login======== */}
-          {/* <SocialLogin></SocialLogin> */}
+          <SocialLogin></SocialLogin>
           {/* ========Create a new account========= */}
           <p className="my-4 text-center">Already have an account, <Link href={"/signin"} className="text-indigo-500 font-semibold underline">Log In</Link></p>
         </div>

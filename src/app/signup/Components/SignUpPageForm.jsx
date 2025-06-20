@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import PasswordValidation from "./PasswordValidation";
 import { LuEyeClosed } from "react-icons/lu";
 import { FaEye } from "react-icons/fa6";
-// import registerUsers from "@/actions/auth/registerUsers";
+import registerUsers from "@/actions/auth/registerUsers";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -22,31 +22,30 @@ const SignUpPageForm = () => {
 
   // ============Form submission handler=========
   const formHandler = (data) => {
-    console.log(data);
-    // const result = registerUsers(data);
-    // result.then((data) => {
-    //   if (data.status === "failed") {
-    //     toast.error(data.message, {
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //     });
-    //   } else if (data.status === "error") {
-    //     toast.warn(data.message, {
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //     });
-    //   } else if (data.status === "success" && data.userId) {
-    //     toast.success("User account has been created successfully", {
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //     });
-    //     reset();
-    //     router.push("/signin");
-    //   }
-    // });
+    const result = registerUsers(data);
+    result.then((data) => {
+      if (data.status === "failed") {
+        toast.error(data.message, {
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else if (data.status === "error") {
+        toast.warn(data.message, {
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else if (data.status === "success" && data.userId) {
+        toast.success("User account has been created successfully", {
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        reset();
+        router.push("/signin");
+      }
+    });
   };
 
   // ==========Password Field on Focus=================
@@ -160,7 +159,10 @@ const SignUpPageForm = () => {
       </div>
       {/* ===========Sign Up button======================= */}
       {isValidPassword ? (
-        <button type="submit" className="bg-indigo-500 py-4 rounded-md text-white font-bold cursor-pointer w-full transition">
+        <button
+          type="submit"
+          className="bg-indigo-500 py-4 rounded-md text-white font-bold cursor-pointer w-full transition"
+        >
           Sign Up
         </button>
       ) : (

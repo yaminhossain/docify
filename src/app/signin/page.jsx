@@ -1,7 +1,7 @@
 import signUpAndLoginAnimation from "@/../public/animations/signUpAndLoginAnimation.json";
 import LottieAnimation from "@/components/LottieAnimation/LottieAnimation";
 import SignInPageForm from "./Components/SignInPageForm";
-// import SocialLogin from "@/components/SocialLogin/SocialLogin";
+import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import Link from "next/link";
 const SignInPage = () => {
   return (
@@ -18,7 +18,7 @@ const SignInPage = () => {
         <div className="flex-1 p-4">
           <SignInPageForm></SignInPageForm>
           {/* ======social login======== */}
-          {/* <SocialLogin></SocialLogin> */}
+          <SocialLogin></SocialLogin>
           {/* ========Create a new account========= */}
           <p className="my-4 text-center">Don't have an account, <Link href={"/signup"} className="text-indigo-500 font-semibold underline">Sing Up</Link></p>
         </div>
