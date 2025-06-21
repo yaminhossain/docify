@@ -1,0 +1,2 @@
+==========================TODOS===============
+1. Replace the api local host with hosted server api

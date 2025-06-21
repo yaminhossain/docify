@@ -6,6 +6,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const CreateAndJoinDocument = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,8 +16,25 @@ const CreateAndJoinDocument = () => {
   const documentNameInputHandler = (e) => {
     setDocumentName(e.target.value);
   };
+  
   const newDocumentCreationHandler = () => {
-    router.push(`/documents/${uuidv4()}`);
+    if (documentName) {
+      const documentId = uuidv4();
+      const document = {
+        name: documentName,
+        documentId,
+        data: "",
+        owner: "Yamin Hossain",
+        shared: "",
+        created: new Date(),
+      };
+      // console.log(document);
+      axios.post("http://localhost:5000/documents", document).then((data) => {
+        if (data?.data?.insertedId) {
+          router.push(`/documents/${documentId}`);
+        }
+      });
+    }
   };
 
   return (
