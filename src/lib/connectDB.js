@@ -10,6 +10,7 @@ const client = new MongoClient(uri, {
 
 export const collectionNames = {
   USERS: "users",
+  DOCUMENTS: "documents",
 };
 // =======This function returns a mongodb collection=========
 export default function connectDB(collectionName) {

@@ -24,8 +24,8 @@ const CreateAndJoinDocument = () => {
         name: documentName,
         documentId,
         data: "",
-        owner: "Yamin Hossain",
-        shared: "",
+        author: "Yamin Hossain",
+        owners: [],
         created: new Date(),
       };
       // console.log(document);
