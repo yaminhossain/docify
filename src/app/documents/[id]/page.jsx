@@ -30,9 +30,7 @@ const SingleDocumentPage = async ({ params }) => {
         </div>
       </div>
       {/* =========document editor========= */}
-      <div className="bg-indigo-100 min-h-screen">
-        <TextEditor></TextEditor>
-      </div>
+      <TextEditor></TextEditor>
     </div>
   );
 };
