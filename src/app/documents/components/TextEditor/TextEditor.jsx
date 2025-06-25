@@ -1,16 +1,46 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "quill/dist/quill.snow.css";
+import { io } from "socket.io-client";
 
 const TextEditor = () => {
   const wrapperRef = useRef(null);
   const [quillLoaded, setQuillLoaded] = useState(false);
-  const [quill, setQuill] = useState();
+  const [quill, setQuill] = useState(null);
+  const [socket, setSocket] = useState(null);
+
+  // ======================socket.io setup======================
+  useEffect(() => {
+    const socketInstance = io("http://localhost:5000");
+    setSocket(socketInstance);
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, []);
+
+  // ==============Quill Delta===============
+  const deltaHandler = useCallback(
+    // using useCallback to avoid unnecessary function re creation
+    (delta, oldDelta,source) => {
+      if (source === "user") {
+        socket.emit("send-changes",delta)
+      }
+    },
+    [socket]
+  );
 
   // ====================Quill Editor Setup=====================
   useEffect(() => {
+    // Ensure ref is available
+    if (wrapperRef.current === null) {
+      return;
+    }
+
     const loadQuill = async () => {
-      const Quill = (await import("quill")).default; //Using JavaScript Dynamic import
+      //Using JavaScript Dynamic import
+      const Quill = (await import("quill")).default;
+
+      // toolbar options
       const toolbarOptions = [
         ["bold", "italic", "underline", "strike"], // toggled buttons
         ["blockquote", "code-block"],
@@ -30,8 +60,9 @@ const TextEditor = () => {
         [{ align: [] }],
         ["clean"], // remove formatting button
       ];
-      const editor = document.createElement("div");
+      // Clear the wrapper before appending the editor
       wrapperRef.current.innerHTML = "";
+      const editor = document.createElement("div");
       wrapperRef.current.append(editor);
       const quillInstance = new Quill(editor, {
         modules: {
@@ -41,27 +72,23 @@ const TextEditor = () => {
       });
       setQuillLoaded(true);
       setQuill(quillInstance);
+
+      // ----------------------Quill text-change event for working with delta-----------------
+      quillInstance.on("text-change", deltaHandler);
     };
     loadQuill();
 
     // useEffect cleanup
     return () => {
-      wrapperRef.innerHTML = "";
+      if (quill) {
+        quill?.off("text-change", deltaHandler);
+      }
+      if (wrapperRef.current) {
+        wrapperRef.current.innerHTML = "";
+      }
     };
-  }, []);
+  }, [deltaHandler]);
 
-  // ==============Quill Delta===============
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", (delta, oldDelta, source) => {
-        if (source == "api") {
-          console.log("An API call triggered this change.");
-        } else if (source == "user") {
-          console.log("A user action triggered this change.", delta);
-        }
-      });
-    }
-  }, [quill]);
   return (
     <div>
       <div className="editorContainer bg-gray-100" ref={wrapperRef}></div>
