@@ -29,7 +29,7 @@ const CreateAndJoinDocument = () => {
         created: new Date(),
       };
       // console.log(document);
-      axios.post("http://localhost:5000/documents", document).then((data) => {
+      axios.post("https://docify-server.onrender.com/documents", document).then((data) => {
         if (data?.data?.insertedId) {
           router.push(`/documents/${documentId}`);
         }

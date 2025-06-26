@@ -12,7 +12,7 @@ const TextEditor = ({ documentId }) => {
 
   // ======================socket.io setup======================
   useEffect(() => {
-    const socketInstance = io("http://localhost:5000");
+    const socketInstance = io("https://docify-server.onrender.com/");
     setSocket(socketInstance);
     return () => {
       socketInstance.disconnect();
