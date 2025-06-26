@@ -30,7 +30,7 @@ const SingleDocumentPage = async ({ params }) => {
         </div>
       </div>
       {/* =========document editor========= */}
-      <TextEditor></TextEditor>
+      <TextEditor documentId={id}></TextEditor>
     </div>
   );
 };
