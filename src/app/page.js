@@ -8,8 +8,7 @@ export default function Home() {
       <div className="h-2/5 bg-gray-100 flex flex-col gap-4 items-center justify-center">
         <h1 className="text-4xl">Start Writing a Document</h1>
         <p className="max-w-1/4 text-center">
-          Create fully new document or Join in an existing shared document by
-          pasting the room key of a document
+          Create fully new document or Open an Existing Document.
         </p>
         <CreateAndJoinDocument></CreateAndJoinDocument>
       </div>

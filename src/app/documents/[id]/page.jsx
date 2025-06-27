@@ -1,8 +1,8 @@
 import connectDB, { collectionNames } from "@/lib/connectDB";
 import Image from "next/image";
 import docIcon from "@/../public/icons/docs.png";
-import { LuShare2 } from "react-icons/lu";
 import TextEditor from "../components/TextEditor/TextEditor";
+import DocumentShareButton from "../components/DocumentShareButton/DocumentShareButton";
 
 const SingleDocumentPage = async ({ params }) => {
   const { id } = await params;
@@ -10,6 +10,7 @@ const SingleDocumentPage = async ({ params }) => {
   //=======Database Tasks=========
   const collection = connectDB(collectionNames.DOCUMENTS);
   const document = await collection.findOne({ documentId: id });
+  console.log(document);
 
   return (
     <div>
@@ -22,10 +23,7 @@ const SingleDocumentPage = async ({ params }) => {
           <p className="text-2xl font-medium">{document.name}</p>
         </div>
         <div>
-          <button className="py-2 px-5 bg-indigo-300 hover:bg-indigo-400 rounded-full flex gap-2 items-center justify-center font-semibold cursor-pointer justify-self-end">
-            Share
-            <LuShare2 />
-          </button>
+          <DocumentShareButton docName={document?.name}></DocumentShareButton>
           <p className="text-gray-700 mt-1">Owners:{document?.author}</p>
         </div>
       </div>

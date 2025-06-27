@@ -7,6 +7,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 const CreateAndJoinDocument = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +17,7 @@ const CreateAndJoinDocument = () => {
   const documentNameInputHandler = (e) => {
     setDocumentName(e.target.value);
   };
-  
+
   const newDocumentCreationHandler = () => {
     if (documentName) {
       const documentId = uuidv4();
@@ -29,11 +30,13 @@ const CreateAndJoinDocument = () => {
         created: new Date(),
       };
       // console.log(document);
-      axios.post("https://docify-server.onrender.com/documents", document).then((data) => {
-        if (data?.data?.insertedId) {
-          router.push(`/documents/${documentId}`);
-        }
-      });
+      axios
+        .post("https://docify-server.onrender.com/documents", document)
+        .then((data) => {
+          if (data?.data?.insertedId) {
+            router.push(`/documents/${documentId}`);
+          }
+        });
     }
   };
 
@@ -79,9 +82,10 @@ const CreateAndJoinDocument = () => {
       {/* =======================Modal Ends HERE========================== */}
 
       <div className="max-w-2/4 w-full flex gap-2">
-        <button className="border border-indigo-500 bg-white hover:bg-indigo-500 hover:text-white transition p-5 rounded-full cursor-pointer flex-1">
-          Join an Existing Document
-        </button>
+        <Link
+          className="border border-indigo-500 bg-white hover:bg-indigo-500 hover:text-white transition p-5 rounded-full cursor-pointer flex-1 text-center"
+          href={"/documents"}
+        >View All Existing Documents</Link>
         <button
           className="bg-indigo-500 hover:bg-indigo-400 transition text-white p-5 rounded-full cursor-pointer flex-1"
           onClick={() => setIsModalOpen(!isModalOpen)}
