@@ -23,7 +23,7 @@ const SingleDocumentPage = async ({ params }) => {
           <p className="text-2xl font-medium">{document.name}</p>
         </div>
         <div>
-          <DocumentShareButton docName={document?.name}></DocumentShareButton>
+          <DocumentShareButton docName={document?.name} docID={id}></DocumentShareButton>
           <p className="text-gray-700 mt-1">Owners:{document?.author}</p>
         </div>
       </div>

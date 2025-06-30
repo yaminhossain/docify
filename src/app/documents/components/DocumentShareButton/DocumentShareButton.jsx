@@ -1,17 +1,20 @@
 "use client";
 import shareDocWithUser from "@/lib/shareDocWithUser";
 import { useEffect, useRef, useState } from "react";
-import { FaRegCircleXmark } from "react-icons/fa6";
+import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
+import { FiLoader } from "react-icons/fi";
 import { IoIosSend } from "react-icons/io";
 import { LuShare2 } from "react-icons/lu";
 
-const DocumentShareButton = ({ docName }) => {
+const DocumentShareButton = ({ docName, docID }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [sharedOwnerEmail, setSharedOwnerEmail] = useState("");
   const [databaseResponseForSharedUser, setDatabaseResponseForSharedUser] =
     useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const dropDownRef = useRef(null);
-  console.log("database response",databaseResponseForSharedUser);
+  console.log("database response", databaseResponseForSharedUser);
 
   // handling dropdown visibility
   const showDropDown = () => {
@@ -32,8 +35,10 @@ const DocumentShareButton = ({ docName }) => {
   }, []);
 
   // send shared user email to the server for searching
-  const sendEmail = async() => {
-    const result = await shareDocWithUser(sharedOwnerEmail);
+  const sendEmail = async () => {
+    setIsLoading(true);
+    const result = await shareDocWithUser(sharedOwnerEmail, docID);
+    setIsLoading(false);
     setDatabaseResponseForSharedUser(result);
   };
   return (
@@ -57,20 +62,21 @@ const DocumentShareButton = ({ docName }) => {
           placeholder="Add people by their email "
           onChange={(e) => setSharedOwnerEmail(e.target.value.trim())}
         />
-        {databaseResponseForSharedUser ? (
-          <></>
+        {databaseResponseForSharedUser?.modifiedCount > 0 ? (
+          <p className="text-green-400 flex items-center gap-2">
+            <FaRegCircleCheck /> <span>User added successfully</span>
+          </p>
         ) : (
           <p className="text-red-400 flex items-center gap-2">
             <FaRegCircleXmark /> <span>user does not exist</span>
           </p>
         )}
-
         <button
           className="py-2 px-5 mt-4 bg-indigo-300 hover:bg-indigo-400 rounded-full flex gap-2 items-center justify-center font-semibold cursor-pointer justify-self-end"
           onClick={sendEmail}
         >
           Send
-          <IoIosSend />
+          {isLoading ? <FiLoader /> : <IoIosSend />}
         </button>
       </div>
     </div>
