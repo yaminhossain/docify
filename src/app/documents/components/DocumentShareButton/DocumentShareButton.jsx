@@ -5,16 +5,16 @@ import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import { FiLoader } from "react-icons/fi";
 import { IoIosSend } from "react-icons/io";
 import { LuShare2 } from "react-icons/lu";
+import { RiUserSearchLine } from "react-icons/ri";
 
 const DocumentShareButton = ({ docName, docID }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [sharedOwnerEmail, setSharedOwnerEmail] = useState("");
   const [databaseResponseForSharedUser, setDatabaseResponseForSharedUser] =
-    useState(true);
+    useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const dropDownRef = useRef(null);
-  console.log("database response", databaseResponseForSharedUser);
 
   // handling dropdown visibility
   const showDropDown = () => {
@@ -62,15 +62,29 @@ const DocumentShareButton = ({ docName, docID }) => {
           placeholder="Add people by their email "
           onChange={(e) => setSharedOwnerEmail(e.target.value.trim())}
         />
-        {databaseResponseForSharedUser?.modifiedCount > 0 ? (
-          <p className="text-green-400 flex items-center gap-2">
-            <FaRegCircleCheck /> <span>User added successfully</span>
-          </p>
+        {isLoading ? (
+          <p>Searching...</p>
+        ) : databaseResponseForSharedUser ? (
+          <>
+            {databaseResponseForSharedUser.modifiedCount > 0 ? (
+              <p className="text-green-400 flex items-center gap-2">
+                <FaRegCircleCheck />
+                <span>User added successfully</span>
+              </p>
+            ) : (
+              <p className="text-amber-400 flex items-center gap-2">
+                <RiUserSearchLine />
+                <span>Already shared with this user</span>
+              </p>
+            )}
+          </>
         ) : (
           <p className="text-red-400 flex items-center gap-2">
-            <FaRegCircleXmark /> <span>user does not exist</span>
+            <FaRegCircleXmark />
+            <span>User does not exist</span>
           </p>
         )}
+
         <button
           className="py-2 px-5 mt-4 bg-indigo-300 hover:bg-indigo-400 rounded-full flex gap-2 items-center justify-center font-semibold cursor-pointer justify-self-end"
           onClick={sendEmail}

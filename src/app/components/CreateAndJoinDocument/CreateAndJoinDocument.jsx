@@ -8,11 +8,15 @@ import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const CreateAndJoinDocument = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [documentName, setDocumentName] = useState("");
+
   const router = useRouter();
+  const userData = useSession();
+  const userEmail = userData?.data?.user?.email;
 
   const documentNameInputHandler = (e) => {
     setDocumentName(e.target.value);
@@ -25,7 +29,7 @@ const CreateAndJoinDocument = () => {
         name: documentName,
         documentId,
         data: "",
-        author: "Yamin Hossain",
+        author: userEmail,
         owners: [],
         created: new Date(),
       };
@@ -85,7 +89,9 @@ const CreateAndJoinDocument = () => {
         <Link
           className="border border-indigo-500 bg-white hover:bg-indigo-500 hover:text-white transition p-5 rounded-full cursor-pointer flex-1 text-center"
           href={"/documents"}
-        >View All Existing Documents</Link>
+        >
+          View All Existing Documents
+        </Link>
         <button
           className="bg-indigo-500 hover:bg-indigo-400 transition text-white p-5 rounded-full cursor-pointer flex-1"
           onClick={() => setIsModalOpen(!isModalOpen)}

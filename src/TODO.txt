@@ -1,2 +1,7 @@
 ==========================TODOS===============
 1. Replace the api local host with hosted server api
+
+3.NEXTAUTH_URL after deployment
+
+==========================DONE===============
+2.[DONE] NEXTAUTH_SECRET

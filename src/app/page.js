@@ -1,7 +1,13 @@
+import { getServerSession } from "next-auth";
 import CreateAndJoinDocument from "./components/CreateAndJoinDocument/CreateAndJoinDocument";
 import DocumentsTable from "@/components/DocumentsTable/DocumentsTable";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+import getRecentDocuments from "@/lib/getRecentDocuments";
 
-export default function Home() {
+export default async function Home() {
+  const sessionData = await getServerSession(authOptions);
+  const recentDocuments = await getRecentDocuments(sessionData?.user?.email);
+
   return (
     <div className="h-screen">
       {/* =====================Create and Join document section================== */}
@@ -17,7 +23,7 @@ export default function Home() {
         <h1 className="mt-3 mb-7 text-xl font-semibold text-gray-800">
           Recent documents
         </h1>
-        <DocumentsTable></DocumentsTable>
+        <DocumentsTable documentsData={recentDocuments}></DocumentsTable>
       </div>
     </div>
   );

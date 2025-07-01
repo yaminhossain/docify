@@ -4,7 +4,7 @@ const Spinners = () => {
 
   return (
     <div>
-      <ScaleLoader color="#ff3811" loading />
+      <ScaleLoader color="#4F39F6" loading />
     </div>
   );
 };

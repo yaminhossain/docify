@@ -7,7 +7,7 @@ const socialProviderUsers = async (payload) => {
   try {
     // Using providerAccountId for query because not all provider provides email after log in
     const isExists = await usersCollection.findOne({
-      providerAccountId: payload.providerAccountId,
+      email: payload.email,
     });
     if (!isExists) {
       await usersCollection.insertOne(payload);

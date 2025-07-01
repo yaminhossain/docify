@@ -2,8 +2,6 @@ import loginUsers from "@/actions/auth/loginUsers";
 import socialProviderUsers from "@/actions/auth/socialProviderUsers";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
-import GitHubProvider from "next-auth/providers/github";
 import connectDB, { collectionNames } from "@/lib/connectDB";
 
 export const authOptions = {
