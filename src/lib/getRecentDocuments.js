@@ -1,8 +1,9 @@
-"use server"
+"use server";
 import connectDB, { collectionNames } from "./connectDB";
 
 const getRecentDocuments = async (email) => {
   try {
+    if (!email) return [];
     const documentCOllection = connectDB(collectionNames.DOCUMENTS);
     const query = { $or: [{ author: email }, { owners: email }] };
     const recentDocuments = await documentCOllection

@@ -5,7 +5,7 @@ import { IoWarningOutline } from "react-icons/io5";
 
 const GlobalWarningMessage = () => {
   const [visibility, setVisibility] = useState(true);
-  
+
   useEffect(() => {
     const closingTime = setInterval(() => {
       setVisibility(false);
@@ -22,8 +22,7 @@ const GlobalWarningMessage = () => {
         <IoWarningOutline className="text-lg inline" /> Warning: Server side is
         deployed to <strong>Render</strong>. Render's free instance spins down
         with inactivity, which can delay requests by 50 seconds or more. So, for
-        few buttons on their initial request you might need to click{" "}
-        <strong>more than once</strong> in one go to view the expected result.
+        few buttons on their initial request you might need to <strong>wait few seconds</strong> to view the expected result.
       </p>
       <button
         className="bg-amber-100 text-amber-600 cursor-pointer pe-2"

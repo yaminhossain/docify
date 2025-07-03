@@ -4,6 +4,7 @@ import connectDB, { collectionNames } from "./connectDB";
 
 const getSharedDocuments = async (email, limit) => {
   try {
+    if (!email) return [];
     const documentCOllection = connectDB(collectionNames.DOCUMENTS);
     const sharedDocs = await documentCOllection
       .find({ owners: email })

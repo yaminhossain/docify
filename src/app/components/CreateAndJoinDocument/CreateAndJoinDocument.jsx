@@ -17,19 +17,20 @@ const CreateAndJoinDocument = () => {
   const router = useRouter();
   const userData = useSession();
   const userEmail = userData?.data?.user?.email;
+  console.log("user email from create and join documents",userData);
 
   const documentNameInputHandler = (e) => {
     setDocumentName(e.target.value);
   };
 
   const newDocumentCreationHandler = () => {
-    if (documentName) {
+    if (documentName && userEmail) {
       const documentId = uuidv4();
       const document = {
         name: documentName,
         documentId,
         data: "",
-        author: userEmail,
+        author: userEmail || "",
         owners: [],
         created: new Date(),
       };

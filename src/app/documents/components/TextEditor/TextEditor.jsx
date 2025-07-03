@@ -8,7 +8,6 @@ const TextEditor = ({ documentId }) => {
   const [quillLoaded, setQuillLoaded] = useState(false);
   const [quill, setQuill] = useState(null);
   const [socket, setSocket] = useState(null);
-  console.log(documentId);
 
   // ======================socket.io setup======================
   useEffect(() => {
@@ -18,6 +17,7 @@ const TextEditor = ({ documentId }) => {
       socketInstance.disconnect();
     };
   }, []);
+  
   // ====================Quill Editor Setup=====================
   useEffect(() => {
     // Ensure ref is available

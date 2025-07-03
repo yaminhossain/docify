@@ -2,14 +2,14 @@
 import connectDB, { collectionNames } from "./connectDB";
 
 const shareDocWithUser = async (email, id) => {
-  console.log("Email & Id", email, id);
+  // console.log("Email & Id", email, id);
   try {
     const userCollection = connectDB(collectionNames.USERS);
     const documentsCollection = connectDB(collectionNames.DOCUMENTS);
 
     // find user
     const user = await userCollection.findOne({ email });
-    console.log("user", user);
+    // console.log("user", user);
     if (user === null) {
       return null;
     }

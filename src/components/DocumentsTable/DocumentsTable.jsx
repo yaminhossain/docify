@@ -1,12 +1,12 @@
-import Image from "next/image";
-import docsIcon from "@/../public/icons/docs.png";
 import DocumentsNotFound from "@/app/documents/components/DocumentsNotFound/DocumentsNotFound";
+import TableRow from "./TableRow";
 
 const DocumentsTable = ({ documentsData }) => {
   console.log("Documents table", documentsData);
+
   return (
     <>
-      {documentsData.length>0 ? (
+      {documentsData.length > 0 ? (
         <table className="w-full table-auto">
           <tbody>
             <tr className="border-b border-b-gray-500">
@@ -15,9 +15,10 @@ const DocumentsTable = ({ documentsData }) => {
               <th className="text-start">Owner</th>
               <th className="text-start">Shared owners</th>
             </tr>
-            {documentsData.map((document) => (
-              <TableRow key={document._id} data={document}></TableRow>
-            ))}
+            {documentsData.map((document) => {
+              document._id = document._id.toString();
+              return <TableRow key={document._id} data={document}></TableRow>;
+            })}
           </tbody>
         </table>
       ) : (
@@ -27,17 +28,3 @@ const DocumentsTable = ({ documentsData }) => {
   );
 };
 export default DocumentsTable;
-
-// ================================Each Row=======================
-const TableRow = ({ data }) => {
-  return (
-    <tr className="border-b border-b-gray-500 hover:bg-gray-100 cursor-pointer">
-      <td>
-        <Image src={docsIcon} height={20} width={20} alt="doc icon" />
-      </td>
-      <td className="py-3">{data?.name}</td>
-      <td>{data?.author}</td>
-      <td>{data?.owners.join(", ")}</td>
-    </tr>
-  );
-};

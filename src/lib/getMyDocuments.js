@@ -4,6 +4,7 @@ import connectDB, { collectionNames } from "./connectDB";
 
 const getMyDocuments = async (email, limit) => {
   try {
+    if (!email) return [];
     const documentCOllection = connectDB(collectionNames.DOCUMENTS);
     const myDocs = await documentCOllection
       .find({ author: email })
