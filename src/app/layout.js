@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <GlobalWarningMessage></GlobalWarningMessage>
           <NavBar></NavBar>
-          <main className="ms-[57px]">{children}</main>
+          <main className="ms-[56px]">{children}</main>
           <ToastContainer></ToastContainer>
         </AuthProvider>
       </body>

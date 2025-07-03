@@ -17,7 +17,7 @@ const GlobalWarningMessage = () => {
   return (
     <div className={`justify-between ${visibility ? "flex " : "hidden"}`}>
       <p
-        className={`text-justify bg-amber-100 text-amber-600 p-2 ms-[57px] grow`}
+        className={`text-justify bg-amber-100 text-amber-600 p-2 ms-[56px] grow`}
       >
         <IoWarningOutline className="text-lg inline" /> Warning: Server side is
         deployed to <strong>Render</strong>. Render's free instance spins down

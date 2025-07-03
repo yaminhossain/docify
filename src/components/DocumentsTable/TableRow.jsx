@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 const TableRow = ({ data }) => {
   // console.log("Data from table row",data);
   const router = useRouter();
+ 
   return (
     <tr
       className="border-b border-b-gray-500 hover:bg-gray-100 cursor-pointer"
       onClick={() => {
-        router.push(`documents/${data.documentId}`);
+        router.push(`/documents/${data.documentId}`);
       }}
     >
       <td>
