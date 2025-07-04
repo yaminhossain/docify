@@ -11,7 +11,7 @@ const LogOutButton = () => {
         signOut();
       }}
     >
-      <FiLogOut className="text-2xl" />
+      <FiLogOut className="text-2xl text-gray-700" />
     </button>
   );
 };

@@ -1,12 +1,25 @@
 "use client";
 import Link from "next/link";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { FaHome, FaRegUser } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import LogOutButton from "./LogOutButton";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import defaultUserImage from "@/../public/icons/defaultUser.png";
 
 const NavBar = () => {
   const pathname = usePathname();
+  const userData = useSession();
+
+  //profile picture image style for <Image></Image> component
+  const profileStyle = {
+    borderRadius: "100%",
+    objectFit: "contain",
+    height: "40px",
+    width: "40px",
+  };
+
   return (
     <nav className="flex flex-col gap-6 justify-center items-center fixed h-full top-0 p-2 bg-white shadow-lg w-14">
       {/* ----Home------ */}
@@ -44,7 +57,13 @@ const NavBar = () => {
           href={"/profile"}
           className="flex flex-col items-center text-neutral-700"
         >
-          <FaRegUser className="text-2xl font-bold " />
+          <Image
+            src={userData?.data?.user?.image || defaultUserImage}
+            height={40}
+            width={40}
+            alt="user profile picture"
+            style={profileStyle}
+          />
         </Link>
         {/*-------- tool tips---- */}
         <ToolTip name={"Profile"} />
