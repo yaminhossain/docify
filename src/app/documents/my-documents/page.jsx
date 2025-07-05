@@ -3,6 +3,11 @@ import DocumentsTable from "@/components/DocumentsTable/DocumentsTable";
 import getMyDocuments from "@/lib/getMyDocuments";
 import { getServerSession } from "next-auth";
 
+export const metadata = {
+  title: "Docify | My Documents",
+  description: "Best document editor ever",
+};
+
 const MyDocumentsPage = async() => {
   const sessionData = await getServerSession(authOptions);
   const myDocuments = await getMyDocuments(sessionData?.user?.email, 0);

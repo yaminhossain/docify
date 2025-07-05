@@ -4,6 +4,12 @@ import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import Link from "next/link";
 import SignUpPageForm from "./Components/SignUpPageForm";
 
+export const metadata = {
+  title: "Docify | Sign Up",
+  description: "Best document editor ever",
+};
+
+
 const SignUpPage = () => {
   return (
     <div className="max-w-7xl mx-auto">
@@ -21,7 +27,15 @@ const SignUpPage = () => {
           {/* ======social login======== */}
           <SocialLogin></SocialLogin>
           {/* ========Create a new account========= */}
-          <p className="my-4 text-center">Already have an account, <Link href={"/signin"} className="text-indigo-500 font-semibold underline">Log In</Link></p>
+          <p className="my-4 text-center">
+            Already have an account,{" "}
+            <Link
+              href={"/signin"}
+              className="text-indigo-500 font-semibold underline"
+            >
+              Log In
+            </Link>
+          </p>
         </div>
       </div>
     </div>

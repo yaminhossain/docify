@@ -3,6 +3,12 @@ import LottieAnimation from "@/components/LottieAnimation/LottieAnimation";
 import SignInPageForm from "./Components/SignInPageForm";
 import SocialLogin from "@/components/SocialLogin/SocialLogin";
 import Link from "next/link";
+
+export const metadata = {
+  title: "Docify | Log In",
+  description: "Best document editor ever",
+};
+
 const SignInPage = () => {
   return (
     <div className="max-w-7xl mx-auto">

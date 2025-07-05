@@ -5,6 +5,11 @@ import Link from "next/link";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import getSharedDocuments from "@/lib/getSharedDocuments";
 
+export const metadata = {
+  title: "Docify | Documents",
+  description: "Best document editor ever",
+};
+
 const DocumentsPage = async () => {
   const sessionData = await getServerSession(authOptions);
   const myDocuments = await getMyDocuments(sessionData?.user?.email, 10);

@@ -3,6 +3,11 @@ import DocumentsTable from "@/components/DocumentsTable/DocumentsTable";
 import getSharedDocuments from "@/lib/getSharedDocuments";
 import { getServerSession } from "next-auth";
 
+export const metadata = {
+  title: "Docify | Shared Documents",
+  description: "Best document editor ever",
+};
+
 const SharedDocumentsPage = async () => {
   const sessionData = await getServerSession(authOptions);
   const sharedDocuments = await getSharedDocuments(sessionData?.user?.email, 0);
